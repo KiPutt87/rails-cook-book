@@ -9,6 +9,8 @@
 #   end
 Recipe.destroy_all
 
+puts "Creating new recipes..."
+
 recipe = Recipe.create!(name: "Spaghetti Bolognese", description: "Beef mince and tomato spaghetti", image_url: "https://plus.unsplash.com/premium_photo-1664478291780-0c67f5fb15e6?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8c3BhZ2hldHRpJTIwYm9sb2duZXNlfGVufDB8fDB8fHww", rating: 4.4)
 
 recipe = Recipe.create!(name: "Lasagne", description: "Layers of beef mince, bechamel sauce and authentic italian pasta sheets", image_url: "https://images.unsplash.com/photo-1709429790175-b02bb1b19207?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bGFzYWduZXxlbnwwfHwwfHx8MA%3D%3D", rating: 5)
