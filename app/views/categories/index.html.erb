@@ -1,0 +1,33 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+  <div class="text-center">
+    <h1>Cookbook</h1>
+    <p>See your favourite recipes</p>
+  </div>
+</div>
+  <div class=container>
+    <div class="d-flex align-items-center justify-content-between">
+      <h1>List of Categories</h1>
+      <%= link_to "Add a category", new_category_path, class:"btn btn-primary" %>
+    </div>
+
+
+
+    <div class="cards">
+      <% @categories.each do |category| %>
+        <%= link_to category_path(category) do %>
+          <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+            <div>
+              <h2>
+                <%= category.name %>
+              </h2>
+              <p>
+                <%= category.bookmarks.count %> recipes
+              </p>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <%= link_to "Back to Categories", categories_path, class: "btn btn-secondary mt-4" %>
+  </div>
+</div>

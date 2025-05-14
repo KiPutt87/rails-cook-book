@@ -1,0 +1,34 @@
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+
+</div>
+
+<div class="container width-75">
+  <h1><%= @category.name %></h1>
+  <div class="d-flex align-items-center justify-content-between">
+    <h1>Bookmarks</h1>
+    <%= link_to "Add a recipe", new_category_bookmark_path(@category), class:"btn btn-primary" %>
+  </div>
+
+  <div class="cards">
+    <% @category.bookmarks.each do |bookmark| %>
+      <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
+        <div class="d-flex justify-content-between align-items-end" style="max-width: 400px;">
+          <div>
+            <h3>
+              <%= bookmark.recipe.name %>
+            </h3>
+            <p>
+              <%= bookmark.recipe.description %>
+            </p>
+          </div>
+          <p class="rating">
+            <%= bookmark.recipe.rating %>
+          </p>
+            <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class:"delete" do %>
+              <i class="fa-solid fa-trash-can"></i>
+            <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
