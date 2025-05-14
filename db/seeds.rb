@@ -7,6 +7,12 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require "json"
+require "open-url"
+
+puts "CLeaning the DB"
+Bookmark.destroy_all
+Category.destroy_all
 Recipe.destroy_all
 
 puts "Creating new recipes..."
@@ -24,3 +30,30 @@ recipe = Recipe.create!(name: "Ramen Noodles", description: "Quentissential nood
 recipe = Recipe.create!(name: "Steamed Broccoli", description: "Vegan health kick food", image_url: "https://plus.unsplash.com/premium_photo-1702313776847-b90ae4bd048a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c3RlYW1lZCUyMGJyb2Njb2xpfGVufDB8fDB8fHww", rating: 1)
 
 puts "#{Recipe.count} recipes created"
+
+def recipe_builder(id)
+  url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=#{id}"
+  meal_serialized = URI.parse(url).read
+  meal = JSON.parse(meal_serialized)["meals"][0]
+
+  Recipe.create!{
+    name: meal["strMeal"],
+    description: meal["strInstructions"],
+    image_url: meal["strMealThumb"],
+    rating: rand(2..5.0).round(1)
+  };
+  end
+end
+
+categories = ["Italian", "japanese", "burger", "Chinese"]
+
+categories.each do |category|
+  url = "https://www.themealdb.com/api/json/v1/1/filter.php?i=#{category}"
+  recipe_list = URI.parse(url).read
+  recipes = JSON.parse(recipe_list)
+  recipes["meals"].take(5).each do |recipe|
+    recipe_builder(recipe["idMeal"])
+  end
+end
+
+puts "Done! #{Recipe.count} recipes created"

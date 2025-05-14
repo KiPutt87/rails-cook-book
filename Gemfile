@@ -36,6 +36,8 @@ gem "font-awesome-sass", "~> 6.1"
 
 gem "sassc-rails"
 
+gem "cloudinary"
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 
@@ -64,6 +66,7 @@ group :development do
   gem "web-console"
 
   gem "dotenv-rails"
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
 
